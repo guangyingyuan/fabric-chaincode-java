@@ -484,7 +484,9 @@ public class Handler {
 	}
 
 	private static ChaincodeMessage newGetStateEventMessage(final String channelId, final String txId, final String key) {
-		return newEventMessage(GET_STATE, channelId, txId, ByteString.copyFromUtf8(key));
+		return newEventMessage(GET_STATE, channelId, txId, GetState.newBuilder()
+				.setKey(key)
+				.build().toByteString());
 	}
 
 	private static ChaincodeMessage newPutStateEventMessage(final String channelId, final String txId, final String key, final ByteString value) {
@@ -495,7 +497,9 @@ public class Handler {
 	}
 
 	private static ChaincodeMessage newDeleteStateEventMessage(final String channelId, final String txId, final String key) {
-		return newEventMessage(DEL_STATE, channelId, txId, ByteString.copyFromUtf8(key));
+		return newEventMessage(DEL_STATE, channelId, txId, DelState.newBuilder()
+				.setKey(key)
+				.build().toByteString());
 	}
 
 	private static ChaincodeMessage newErrorEventMessage(final String channelId, final String txId, final Throwable throwable) {

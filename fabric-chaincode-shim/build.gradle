@@ -33,6 +33,10 @@ publishing {
         shimJar(MavenPublication) {
             from components.java
             artifactId 'fabric-chaincode-shim'
+
+            artifact sourceJar {
+                classifier "sources"
+            }
         }
     }
 }
@@ -134,6 +138,10 @@ task licenseCheck {
         error += "Fatal Error - All files must have a license header"
         throw new IllegalArgumentException(error)
     }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
 }
 
 build.dependsOn licenseCheck

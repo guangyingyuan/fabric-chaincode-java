@@ -82,6 +82,10 @@ publishing {
         protosJar(MavenPublication) {
             from components.java
             artifactId 'fabric-chaincode-protos'
+
+            artifact sourceJar {
+                classifier "sources"
+            }
         }
     }
 }
@@ -95,3 +99,8 @@ task downloadProtoFiles << {
         }
     }
 }
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+

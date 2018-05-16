@@ -179,7 +179,6 @@ class ChaincodeStubImpl implements ChaincodeStub {
 	public QueryResultsIterator<KeyValue> getStateByRange(String startKey, String endKey) {
 		if (startKey == null || startKey.isEmpty()) startKey = UNSPECIFIED_KEY;
 		if (endKey == null || endKey.isEmpty()) endKey = UNSPECIFIED_KEY;
-		CompositeKey.validateSimpleKeys(startKey, endKey);
 
 		return new QueryResultsIteratorImpl<KeyValue>(this.handler, getChannelId(), getTxId(),
 				handler.getStateByRange(getChannelId(), getTxId(), startKey, endKey),
